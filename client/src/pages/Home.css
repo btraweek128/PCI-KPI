@@ -1,0 +1,83 @@
+.home .hero {
+  margin-bottom: 32px;
+}
+
+.hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  margin: 0 0 8px;
+}
+
+.home h1 {
+  margin: 0 0 8px;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.hero-sub {
+  margin: 0;
+  color: var(--color-muted);
+  max-width: 560px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.card-accent {
+  border-color: rgba(169, 181, 232, 0.35);
+}
+
+.card h2 {
+  margin: 0 0 16px;
+  font-size: 1rem;
+  color: var(--color-accent);
+}
+
+.profile-list {
+  margin: 0;
+}
+
+.profile-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.profile-list > div:last-child {
+  border-bottom: none;
+}
+
+.profile-list dt {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.profile-list dd {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.muted {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.card code {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+}

@@ -1,0 +1,41 @@
+:root {
+  --color-bg: #0E1A52;
+  --color-bg-deep: #0a143f;
+  --color-surface: #152663;
+  --color-accent: #A9B5E8;
+  --color-primary: #3d4fa8;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+  --color-text: #ffffff;
+  --color-muted: #8b9bd4;
+  --color-border: rgba(169, 181, 232, 0.2);
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --radius: 8px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+code {
+  font-family: ui-monospace, Consolas, monospace;
+}
