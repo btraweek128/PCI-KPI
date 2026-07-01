@@ -1,7 +1,7 @@
 # Railway — Express API + PostgreSQL
 
-**Suggested API URL:** `https://pci-kpi-production.up.railway.app`  
-**Suggested client URL:** `https://pci-kpi.web.app` (Firebase)
+**API URL:** `https://pci-kpi-production.up.railway.app`  
+**Client URL:** `https://pci-kpi.web.app` (Firebase)
 
 ---
 
@@ -20,7 +20,7 @@
 |----------|-------|
 | `DATABASE_URL` | Reference from Postgres service |
 | `NODE_ENV` | `production` |
-| `CLIENT_ORIGIN` | Firebase client URL (e.g. `https://pci-kpi.web.app`) |
+| `CLIENT_ORIGIN` | `https://pci-kpi.web.app` |
 | `PORTAL_ISSUER` | `https://pci-intranet-api-production.up.railway.app` |
 | `PORTAL_JWT_PUBLIC_KEY_PEM` | Portal RSA public key (same as Intranet Hub `public.pem`) |
 | `PORTAL_APP_ID` | `kpi` |
@@ -50,8 +50,6 @@ On the **Intranet Hub Railway API** service, set:
 ```
 KPI_APP_URL=https://pci-kpi.web.app
 ```
-
-Do not modify the portal repo in this session — add this variable in Railway after the client is deployed.
 
 ---
 

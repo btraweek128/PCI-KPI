@@ -44,6 +44,9 @@ app.get('/health/config', (_req, res) => {
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/me', require('./routes/me'));
+app.use('/api/cycles', require('./routes/cycles'));
+app.use('/api/kpi-library', require('./routes/kpiLibrary'));
+app.use('/api/worksheets', require('./routes/worksheets'));
 
 const publicDir = path.join(__dirname, 'public');
 const clientDist = path.join(__dirname, '..', 'client', 'dist');

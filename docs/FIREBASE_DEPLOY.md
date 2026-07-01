@@ -1,6 +1,6 @@
 # Firebase Hosting — React Client
 
-**Suggested URL:** `https://pci-kpi.web.app`
+**URL:** `https://pci-kpi.web.app`
 
 ---
 

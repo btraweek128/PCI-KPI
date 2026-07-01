@@ -16,6 +16,7 @@ if (!DATABASE_URL) {
 }
 
 const schemaPath = path.join(__dirname, '..', 'db', 'schema.postgres.sql');
+const seedPilotPath = path.join(__dirname, '..', 'db', 'seed_pilot.postgres.sql');
 
 async function tableExists(client, tableName) {
   const result = await client.query(
@@ -37,13 +38,17 @@ async function run() {
 
   const client = await pool.connect();
   try {
-    const hasMeta = await tableExists(client, 'AppMeta');
-    if (!hasMeta) {
-      console.log('init-db: applying schema.postgres.sql');
-      const schemaSql = fs.readFileSync(schemaPath, 'utf8');
-      await client.query(schemaSql);
+    console.log('init-db: applying schema.postgres.sql');
+    const schemaSql = fs.readFileSync(schemaPath, 'utf8');
+    await client.query(schemaSql);
+
+    const cycleCount = await client.query('SELECT COUNT(*)::int AS cnt FROM "PerformanceCycles"');
+    if (cycleCount.rows[0].cnt === 0) {
+      console.log('init-db: seeding pilot data');
+      const seedSql = fs.readFileSync(seedPilotPath, 'utf8');
+      await client.query(seedSql);
     } else {
-      console.log('init-db: schema already present');
+      console.log('init-db: pilot seed already present');
     }
 
     console.log('init-db: complete');
