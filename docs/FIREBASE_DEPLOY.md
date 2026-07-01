@@ -34,7 +34,7 @@ firebase use pci-kpi
 
 Do **not** set `VITE_DEV_AUTH_TOKEN` in GitHub secrets for production builds.
 
-Push to `main` triggers `.github/workflows/firebase-hosting-merge.yml`.
+Push to `main` triggers `.github/workflows/firebase-hosting-merge.yml` (also runnable manually from **Actions → Deploy to Firebase Hosting on merge → Run workflow**).
 
 ---
 

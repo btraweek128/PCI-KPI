@@ -4,10 +4,14 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      VITE_API_BASE_URL: https://pci-kpi-production.up.railway.app
+      VITE_PORTAL_URL: https://pci-portal.web.app
     steps:
       - uses: actions/checkout@v4
 
@@ -19,9 +23,6 @@ jobs:
 
       - name: Build React client
         working-directory: client
-        env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-          VITE_PORTAL_URL: ${{ secrets.VITE_PORTAL_URL }}
         run: npm ci && npm run build
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
