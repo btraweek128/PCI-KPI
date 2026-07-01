@@ -37,6 +37,7 @@ app.get('/health/config', (_req, res) => {
     portalIssuer: process.env.PORTAL_ISSUER || null,
     portalAppId: process.env.PORTAL_APP_ID || 'kpi',
     hasPortalPublicKey: Boolean(process.env.PORTAL_JWT_PUBLIC_KEY_PEM),
+    hasSessionJwtSecret: Boolean(process.env.SESSION_JWT_SECRET),
     clientOrigin: process.env.CLIENT_ORIGIN || null,
     devBypassAuth: process.env.DEV_BYPASS_AUTH !== 'false',
   });

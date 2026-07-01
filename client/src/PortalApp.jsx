@@ -5,20 +5,24 @@ import AppRoutes from './AppRoutes';
 import AuthCallback from './pages/AuthCallback';
 import { apiFetch } from './api/client';
 import { portalLoginUrl } from './auth/portal';
+import { getSessionToken, clearSessionToken } from './auth/tokenStorage';
 import './components/Layout.css';
 
 function PortalShell() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function load() {
+      if (!getSessionToken()) {
+        window.location.href = portalLoginUrl();
+        return;
+      }
       try {
         const profile = await apiFetch('/api/me');
         setUser(profile);
-      } catch (err) {
-        setError(err.message);
+      } catch {
+        clearSessionToken();
         window.location.href = portalLoginUrl();
       } finally {
         setLoading(false);
@@ -34,6 +38,7 @@ function PortalShell() {
     } catch {
       // redirect anyway
     }
+    clearSessionToken();
     window.location.href = portalLoginUrl();
   }
 
@@ -45,7 +50,7 @@ function PortalShell() {
     );
   }
 
-  if (error || !user) {
+  if (!user) {
     return null;
   }
 

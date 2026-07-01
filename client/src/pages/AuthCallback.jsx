@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { apiFetch } from '../api/client';
 import { portalLoginUrl } from '../auth/portal';
+import { setSessionToken, getSessionToken } from '../auth/tokenStorage';
 import './AuthCallback.css';
 
 export default function AuthCallback() {
@@ -18,10 +19,18 @@ export default function AuthCallback() {
 
     async function redeem() {
       try {
-        await apiFetch('/api/auth/callback', {
+        const result = await apiFetch('/api/auth/callback', {
           method: 'POST',
           body: { token },
         });
+        if (!result.sessionToken) {
+          throw new Error('Sign-in incomplete. The KPI API may need to be redeployed.');
+        }
+        setSessionToken(result.sessionToken);
+        if (!getSessionToken()) {
+          throw new Error('Could not save session on this device.');
+        }
+        await apiFetch('/api/me');
         navigate('/', { replace: true });
       } catch (err) {
         setError(err.message || 'Authentication failed');

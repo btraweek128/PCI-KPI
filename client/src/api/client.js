@@ -1,8 +1,13 @@
+import { getSessionToken } from '../auth/tokenStorage';
+
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 export async function apiFetch(path, { token, method = 'GET', body } = {}) {
   const headers = { 'Content-Type': 'application/json' };
-  if (token) headers.Authorization = `Bearer ${token}`;
+  const sessionToken = token || getSessionToken();
+  if (sessionToken) {
+    headers.Authorization = `Bearer ${sessionToken}`;
+  }
 
   const response = await fetch(`${API_BASE}${path}`, {
     method,

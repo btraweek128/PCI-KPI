@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { verifyAppSession } = require('../services/sessionToken');
 
 function normalizePem(value) {
   if (!value) return null;
@@ -103,6 +104,16 @@ async function requireAuth(req, res, next) {
 
   const header = req.headers.authorization || '';
   const [scheme, token] = header.split(' ');
+  if (scheme === 'Bearer' && token) {
+    try {
+      const sessionUserFromToken = verifyAppSession(token);
+      req.user = sessionUserFromToken;
+      return next();
+    } catch {
+      // fall through to portal token check
+    }
+  }
+
   if (scheme === 'Bearer' && token && isPortalAuthConfigured()) {
     try {
       const payload = verifyPortalToken(token);

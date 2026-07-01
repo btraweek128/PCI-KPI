@@ -4,6 +4,7 @@ const {
   isPortalAuthConfigured,
   SESSION_COOKIE,
 } = require('../middleware/auth');
+const { signAppSession } = require('../services/sessionToken');
 
 const router = express.Router();
 
@@ -40,7 +41,8 @@ router.post('/callback', (req, res) => {
     };
 
     res.cookie(SESSION_COOKIE, JSON.stringify(user), sessionCookieOptions());
-    res.json({ ok: true, user });
+    const sessionToken = signAppSession(user);
+    res.json({ ok: true, user, sessionToken });
   } catch (err) {
     console.error('Handoff failed:', err.message);
     res.status(401).json({ error: 'Authentication failed' });
